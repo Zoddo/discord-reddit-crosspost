@@ -1,4 +1,5 @@
 "use strict";
+const util = require('util');
 const request = require('./request');
 const config = require('./config');
 const db = require('./database');
@@ -53,10 +54,22 @@ async function send_post(sub, t) {
 		if ('images' in t.preview) image = t.preview.images[0].source.url;
 	}
 
-	if (t.selftext) {
-		const max_length = config.subs[sub].text_length;
-		if (t.selftext.length > max_length) embed.description = t.selftext.slice(0, max_length-1) + '…';
-		else embed.description = t.selftext;
+	const link = (t.url !== 'https://www.reddit.com' + t.permalink) ? t.url : '';
+
+	if (t.selftext || link) {
+		embed.description = '';
+
+		if (t.selftext) {
+			const max_length = config.subs[sub].text_length;
+			if (t.selftext.length > max_length) embed.description += t.selftext.slice(0, max_length-1) + '…';
+			else embed.description += t.selftext;
+		}
+
+		if (link) {
+			if (embed.description) embed.description += '\n\n';
+			if (link.length < 50) embed.description += util.format('\\↪ [%s](%s)', link);
+			else embed.description += util.format('\\↪ [Open %s link](%s)', t.domain, link);
+		}
 
 		if (image) embed.thumbnail = {url: image};
 	} else if (image) {
