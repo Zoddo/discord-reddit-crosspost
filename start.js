@@ -41,11 +41,18 @@ async function send_post(sub, t) {
 	if (t.title.length > 256) embed.title = t.title.slice(0, 255) + '…';
 	else embed.title = t.title;
 
-	embed.url = 'https://reddit.com' + t.permalink;
+	embed.url = 'https://www.reddit.com' + t.permalink;
 	embed.author = {
 		name: '/u/' + t.author,
-		url: 'https://reddit.com/u/' + t.author
+		url: 'https://www.reddit.com/u/' + t.author
 	};
+
+	embed.footer = {
+		icon_url: 'https://cdn0.iconfinder.com/data/icons/free-social-media-set/24/reddit-512.png',
+		text: 'Thread created on'
+	};
+
+	embed.timestamp = new Date(t.created * 1000);
 
 	let image;
 	if (t.media && Object.keys(t.media).length) {
