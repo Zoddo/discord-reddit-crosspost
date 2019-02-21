@@ -36,7 +36,7 @@ async function send_post(sub, t) {
 	log('Sending post for %s (on /r/%s)…', t.name, sub);
 
 	const embed = {};
-	embed.color = 0xaecfc8;
+	embed.color = 0xff4500;
 
 	if (t.title.length > 256) embed.title = t.title.slice(0, 255) + '…';
 	else embed.title = t.title;
@@ -80,5 +80,5 @@ async function send_post(sub, t) {
 }
 
 db.init();
-setInterval(check_all, config.fetchInterval * 60000);
 check_all();
+setInterval(check_all, config.fetchInterval * 60000);
