@@ -1,6 +1,6 @@
 const config = {
 	userAgent: "node:discord-reddit-crosspost:v1.0.0 (by /u/zoddo98)",
-	fetchInterval: 1, // minutes
+	fetchInterval: 5, // minutes
 	maxThreads: 5, // per fetch
 	subs: {
 		"Vexera": {
