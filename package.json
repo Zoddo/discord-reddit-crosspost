@@ -1,0 +1,25 @@
+{
+  "name": "discord-reddit-crosspost",
+  "version": "1.0.0",
+  "description": "A node script which pull new reddit threads at a regular interval and post them to a Discord webhook",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zoddo/discord-reddit-crosspost.git"
+  },
+  "keywords": [
+    "discord",
+    "reddit",
+    "webhook",
+    "crosspost"
+  ],
+  "author": "Zoddo <discord-bots@zoddo.fr>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Zoddo/discord-reddit-crosspost/issues"
+  },
+  "homepage": "https://github.com/Zoddo/discord-reddit-crosspost#readme"
+}
