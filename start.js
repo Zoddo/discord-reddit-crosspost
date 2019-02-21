@@ -55,10 +55,12 @@ async function send_post(sub, t) {
 	embed.timestamp = new Date(t.created * 1000);
 
 	let image;
-	if (t.media && Object.keys(t.media).length) {
-		if ('oembed' in t.media) image = t.media.oembed.thumbnail_url;
-	} else if (t.preview && Object.keys(t.preview).length) {
-		if ('images' in t.preview) image = t.preview.images[0].source.url;
+	if (!t.spoiler) {
+		if (t.media && Object.keys(t.media).length) {
+			if ('oembed' in t.media) image = t.media.oembed.thumbnail_url;
+		} else if (t.preview && Object.keys(t.preview).length) {
+			if ('images' in t.preview) image = t.preview.images[0].source.url;
+		}
 	}
 
 	const link = (t.url !== 'https://www.reddit.com' + t.permalink) ? t.url : '';
@@ -70,6 +72,8 @@ async function send_post(sub, t) {
 			const max_length = config.subs[sub].text_length;
 			if (t.selftext.length > max_length) embed.description += t.selftext.slice(0, max_length-1) + '…';
 			else embed.description += t.selftext;
+
+			if (t.spoiler) embed.description = '||' + embed.description + '||';
 		}
 
 		if (link) {
